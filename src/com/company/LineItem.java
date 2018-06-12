@@ -9,6 +9,10 @@ public class LineItem {
     private  double price;
     private String itemPurchase;
     private  int itemNumber;
+    public LineItem() {
+    }
+
+
 
     public LineItem(Scanner input, int itemNumber, String discription, int quantity, double price, String itemPurchased) {
     }

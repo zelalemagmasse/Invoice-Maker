@@ -10,35 +10,53 @@ public class Main{
     public static void main(String[] args) {
         Scanner input1 = new Scanner(System.in);
         String continu="not done";
+        InvoiceReceipt receptHolder=new InvoiceReceipt();
         while(!continu.equalsIgnoreCase("done")) {
+            LineItem item1;
+            item1 = new LineItem();
 
             Scanner input = new Scanner(System.in);
             System.out.println("please Enter Item number");
             int itemNumber = input.nextInt();
+            item1.setItemNumber(itemNumber);
 
-            System.out.println("please Enter Item Discription");
+
+            System.out.println(" please Enter Item purchsed");
             input.nextLine();
-            String discription = input.nextLine();
+            String  itemPurchased = input.nextLine();
+            item1.setItemPurchase(itemPurchased);
             System.out.println("please Enter quantity purchased");
             int quantity = input.nextInt();
+            item1.setQuantity(quantity);
 
             System.out.println("please Enter price");
             double price = input.nextDouble();
+            item1.setPrice(price);
 
-            System.out.println("please Enter Item purchsed");
-            String itemPurchased = input.nextLine();
-            input.nextLine();
+            System.out.println("please Enter Item Discription");
+            input.next();
+            String  discription = input.nextLine();
 
-            LineItem item1;
-            item1 = new LineItem(input, itemNumber, discription, quantity, price, itemPurchased);
+            item1.setDiscription(discription);
             InvoiceMaker newInvoice= new InvoiceMaker();
-            newInvoice.receipt(item1);
-            System.out.printf("Item Quantity Description  %s %n Taxable Subtotal %d %n Untaxable Subtotal %d%n Tax;%d%n Grand Total %d%n ",
-                    newInvoice.receipt(item1).getQuantityDiscr(),newInvoice.receipt(item1).getTaxableSubTotal(),
-                    newInvoice.receipt(item1).getUntaxableSubTotal(),newInvoice.receipt(item1).getTax(),newInvoice.receipt(item1).getGrandTotal());
-             System.out.println("ARE YOU FINISHED WITH YOUR PURCHASE ?");
+            receptHolder.listOfItems.add(newInvoice.receipt(item1));
+
+
+
+
+             System.out.println("IF YOU FINISHED WITH YOUR PURCHASE , YOU MAY TYPE DONE OR PRESS ANY KEY TO CONTINUE PURCHASIING ?");
               continu= input1.nextLine();
         }
+
+
+        for(int i=0;i<receptHolder.listOfItems.size();i++){
+            System.out.printf("Item Quantity Description:  %s %n Taxable Subtotal: %.2f %n Untaxable Subtotal: %.2f%n Tax:%.2f%n Grand Total: %.2f" +
+                            "%n=============================================================================%n ",
+                    receptHolder.listOfItems.get(i).getQuantityDiscr(),receptHolder.listOfItems.get(i).getTaxableSubTotal(),
+                   receptHolder.listOfItems.get(i).getUntaxableSubTotal(),receptHolder.listOfItems.get(i).getTax(),receptHolder.listOfItems.get(i).getGrandTotal());
+        }
+
+
 
     }
 }

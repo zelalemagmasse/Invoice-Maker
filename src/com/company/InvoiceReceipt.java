@@ -1,11 +1,15 @@
 package com.company;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class InvoiceReceipt {
     private String quantityDiscr;
     private double taxableSubTotal;
     private double untaxableSubTotal;
     private double grandTotal;
     private double tax;
+    List<InvoiceReceipt> listOfItems = new ArrayList<>();
 
     public String getQuantityDiscr() {
         return quantityDiscr;
